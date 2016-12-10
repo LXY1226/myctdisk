@@ -28,13 +28,12 @@ public class Main {
 			HttpURLConnection urlconn = (HttpURLConnection) url.openConnection();
 			urlconn.setRequestMethod("GET");
 			urlconn.connect();
-			BufferedReader in = new BufferedReader(new InputStreamReader(urlconn.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(urlconn.getInputStream(),"utf-8"));
 			String line;
 			String result = in.readLine();
 			while ((line = in.readLine()) != null) {
 				result += line + "\n";
 			}
-
 			Document doc = Jsoup.parse(result);
 			filename = doc.select("div.span10").first().child(0).text();
 			String fileinfo = doc.select("div.header_content").first().text();
